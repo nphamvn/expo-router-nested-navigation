@@ -1,5 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useNavigationContainerRef } from "@react-navigation/native";
 import { View, Text, Button } from "react-native";
+import { foo} from "./navigation"
 
 export default function Home() {
   const navigation = useNavigation();
@@ -7,12 +8,31 @@ export default function Home() {
     <View>
       <Text>Home</Text>
       <Button
+        title="Go to Profile"
+        onPress={() => {
+          navigation.navigate("Profile");
+        }}
+      />
+      <Button
         title="dispatch"
         onPress={() => {
+          // navigationRef.emit({
+          //   type: "foo",
+          //   data: {
+          //     bar: "baz",
+          //   },
+          //   canPreventDefault: true,
+          //   target: navigation.getId(),
+          // });
           navigation.dispatch({
-            type: "FOO",
-            payload: { data: "BAR" },
-          });
+            type: "foo",
+            data: {
+              bar: "baz",
+            },
+            canPreventDefault: true,
+            target: navigation.getId(),
+          })
+          //foo()
         }}
       />
     </View>

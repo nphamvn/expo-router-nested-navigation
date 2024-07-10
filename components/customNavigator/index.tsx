@@ -8,17 +8,17 @@ import Profile from "./Profile";
 import { useEffect } from "react";
 
 const Stack = createStackNavigator();
-const navigationRef = createNavigationContainerRef();
+import { navigationRef } from "./navigation";
 
 export default function CustomNavigator() {
   useEffect(() => {
-    navigationRef.current?.addListener("state", (e) => {
+    navigationRef.current?.addListener("foo", (e) => {
       console.log(e);
     });
   }, []);
   return (
-    <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator>
+    <NavigationContainer ref={navigationRef} independent={true}>
+      <Stack.Navigator id="customNavigator">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>

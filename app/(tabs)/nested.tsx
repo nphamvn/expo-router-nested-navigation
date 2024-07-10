@@ -6,10 +6,20 @@ export default function Screen() {
     <View
       style={{
         flex: 1,
+        justifyContent: "center",
       }}
     >
       <Text>Nested Navigator</Text>
-      <CustomNavigator />
+      <View
+        style={{
+          height: 300,
+          backgroundColor: "blue",
+        }}
+      >
+        <Text>Header</Text>
+        <CustomNavigator />
+        <Text>Footer</Text>
+      </View>
     </View>
   );
 }
