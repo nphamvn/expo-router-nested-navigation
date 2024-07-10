@@ -1,6 +1,6 @@
 import { useNavigation, useNavigationContainerRef } from "@react-navigation/native";
 import { View, Text, Button } from "react-native";
-import { foo} from "./navigation"
+import { foo } from "./navigation"
 
 export default function Home() {
   const navigation = useNavigation();
