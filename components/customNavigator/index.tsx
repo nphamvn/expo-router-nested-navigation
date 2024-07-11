@@ -2,9 +2,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "./Home";
 import Custom from "./Custom";
+import { memo } from "react";
 const Stack = createStackNavigator();
+console.log("createStackNavigator");
 
-export default function CustomNavigator({
+function CustomNavigator({
   data,
   onData,
   onCanceled,
@@ -29,12 +31,7 @@ export default function CustomNavigator({
         }
       }}
     >
-      <Stack.Navigator
-        id="customNavigator"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
+      <Stack.Navigator id="customNavigator">
         <Stack.Screen name="Home" component={Home} initialParams={{ data }} />
         <Stack.Screen
           name="Custom"
@@ -45,3 +42,5 @@ export default function CustomNavigator({
     </NavigationContainer>
   );
 }
+
+export default memo(CustomNavigator);
