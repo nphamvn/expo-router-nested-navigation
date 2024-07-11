@@ -1,7 +1,10 @@
 import CustomNavigator from "@/components/customNavigator";
-import { View, Text } from "react-native";
+import { useState } from "react";
+import { View, Text, Button } from "react-native";
 
 export default function Screen() {
+  const [data, setData] = useState<string>();
+  const [showNavigator, setShowNavigator] = useState(false);
   return (
     <View
       style={{
@@ -9,17 +12,34 @@ export default function Screen() {
         justifyContent: "center",
       }}
     >
-      <Text>Nested Navigator</Text>
-      <View
-        style={{
-          height: 300,
-          backgroundColor: "blue",
+      <Text>Data: {data}</Text>
+      <Button
+        title="Enter"
+        onPress={() => {
+          setShowNavigator(true);
         }}
-      >
-        <Text>Header</Text>
-        <CustomNavigator />
-        <Text>Footer</Text>
-      </View>
+      />
+      {showNavigator && (
+        <View
+          style={{
+            height: 300,
+            backgroundColor: "blue",
+          }}
+        >
+          <Text>Header</Text>
+          <CustomNavigator
+            data={data}
+            onData={(data) => {
+              setData(data);
+              setShowNavigator(false);
+            }}
+            onCanceled={() => {
+              setShowNavigator(false);
+            }}
+          />
+          <Text>Footer</Text>
+        </View>
+      )}
     </View>
   );
 }

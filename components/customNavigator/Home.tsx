@@ -1,38 +1,33 @@
-import { useNavigation, useNavigationContainerRef } from "@react-navigation/native";
 import { View, Text, Button } from "react-native";
-import { foo } from "./navigation"
 
-export default function Home() {
-  const navigation = useNavigation();
+export default function Home({ navigation, route }) {
+  const setData = (data: string) => {
+    navigation.dispatch({
+      type: "set_data",
+      data: data,
+    });
+  };
   return (
     <View>
-      <Text>Home</Text>
+      <Text>{route.params?.data}</Text>
       <Button
-        title="Go to Profile"
+        title="foo"
         onPress={() => {
-          navigation.navigate("Profile");
+          setData("foo");
         }}
       />
       <Button
-        title="dispatch"
+        title="custom"
         onPress={() => {
-          // navigationRef.emit({
-          //   type: "foo",
-          //   data: {
-          //     bar: "baz",
-          //   },
-          //   canPreventDefault: true,
-          //   target: navigation.getId(),
-          // });
+          navigation.navigate("Custom");
+        }}
+      />
+      <Button
+        title="cancel"
+        onPress={() => {
           navigation.dispatch({
-            type: "foo",
-            data: {
-              bar: "baz",
-            },
-            canPreventDefault: true,
-            target: navigation.getId(),
-          })
-          //foo()
+            type: "cancel",
+          });
         }}
       />
     </View>
